@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     includereplace: 'grunt-include-replace',
     replace: 'grunt-text-replace',
     validation: 'grunt-html-validation',
-    sprite: 'grunt-spritesmith',
+    sprite: 'grunt-spritesmith'
   });
 
   // Project configuration.
