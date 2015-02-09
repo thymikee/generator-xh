@@ -7,12 +7,12 @@ module.exports = function(grunt) {
   'use strict';
 
   grunt.registerTask('_before-build-html', [
-    'copy:backup'
+    'copy:includes',
+    'useminReset'
   ]);
 
   grunt.registerTask('_after-build-html', [
     'includereplace',
-    'copy:restore',
     'jsbeautifier:html',
     'clean:tmp'
   ]);
@@ -49,7 +49,9 @@ module.exports = function(grunt) {
     'newer:copy:assets'
   ]);
 
-  grunt.registerTask('build-css', [<% if (cssPreprocessor === 'SCSS' || cssPreprocessor === 'LIBSASS') { %>
+  grunt.registerTask('build-css', [
+    'newer:updatemain',
+    <% if (cssPreprocessor === 'SCSS' || cssPreprocessor === 'LIBSASS') { %>
     'sass',<% } %><% if (cssPreprocessor === 'LESS') { %>
     'less',<% } %>
     'autoprefixer',

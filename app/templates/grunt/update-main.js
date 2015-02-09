@@ -1,22 +1,34 @@
 var async = require('async');
-var numCPUs = require('os').cpus().length || 1;
 
 module.exports = function (grunt) {
 'use strict';
 
-  grunt.registerMultiTask('update-main', 'Updates main.scss', function () {
-    async.eachLimit(this.files, numCPUs, function (file, next) {
-      var src = file.src[0];
+  grunt.config('updatemain', {
+    build: {
+        src: '<%= xh.src %>/scss/**/*.scss'
+      }
+  });
 
-      if (typeof src !== 'string') {
-        src = file.orig.src[0];
+  grunt.registerMultiTask('updatemain', 'Updates main.scss after new scss file is added', function () {
+    var done = this.async();
+
+    async.eachLimit(this.files, 4, function (file, next) {
+      var src = file.src;
+
+      if (!src) {
+        return next();
       }
 
-      console.log(this.files, src, next);
-    });
+      for (var i = 0; i < src.length; i++) {
+        addFileToMain(src[i]);
+      }
+
+      next();
+
+    }, done);
   });
 
-  grunt.config('update-main', {
-    dist: {}
-  });
+  function addFileToMain (file) {
+    console.log(file);
+  }
 };

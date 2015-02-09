@@ -8,13 +8,12 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     includereplace: 'grunt-include-replace',
     replace: 'grunt-text-replace',
-    validation: 'grunt-html-validation',
-    sprite: 'grunt-spritesmith'
+    validation: 'grunt-html-validation',<% if (features.useSprites) { %>
+    sprite: 'grunt-spritesmith',<% } %>
+    updatemain: 'grunt/update-main.js'
   });
 
   // Project configuration.
-  grunt.option('force', true);
-
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
