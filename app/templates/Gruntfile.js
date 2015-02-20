@@ -23,7 +23,7 @@ module.exports = function (grunt) {
       src: 'src',
       dist: 'dist',
       tmp: '.tmp',
-      build: ['head.html', 'scripts.html'],
+      build: ['head.<%= extension %>', 'scripts.<%= extension %>'],
       root: __dirname,
       includes: '<%%= xh.src %>/includes',
       designs: 'designs',
